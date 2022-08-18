@@ -1,0 +1,14 @@
+{
+    "skip_files": [
+        "lib/rent_cars/application.ex",
+        "lib/rent_cars_web.ex",
+        "lib/rent_cars_web/telemetry.ex",
+        "lib/rent_cars_web/router.ex",
+        "lib/rent_cars_web/views/error_helpers.ex",
+        "test/support/data_case.ex"
+    ],
+    "coverage_options": {
+        "treat_no_relevant_lines_as_covered": true,
+        "minimum_coverage": 95
+    }
+}
