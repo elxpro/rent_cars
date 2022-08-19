@@ -3,13 +3,6 @@ defmodule RentCarsWeb.Api.CategoryControllerTest do
 
   test "list all categories", %{conn: conn} do
     conn = get(conn, Routes.api_category_path(conn, :index))
-
-    assert json_response(conn, 200)["data"] == [
-             %{
-               "description" => "pumpkin 123",
-               "id" => "123123",
-               "name" => "SPOT"
-             }
-           ]
+    assert json_response(conn, 200)["data"] == []
   end
 end
