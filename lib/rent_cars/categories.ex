@@ -1,5 +1,8 @@
 defmodule RentCars.Categories do
+  alias __MODULE__.Category
+  alias RentCars.Repo
+
   def list_categories do
-    [%{description: "pumpkin 123", id: "123123", name: "SPOT"}]
+    Repo.all(Category)
   end
 end
