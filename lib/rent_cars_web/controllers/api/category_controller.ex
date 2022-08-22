@@ -1,7 +1,7 @@
 defmodule RentCarsWeb.Api.CategoryController do
   use RentCarsWeb, :controller
   alias RentCars.Categories
-  action_fallback RentCarsWeb.Api.FallbackController
+  action_fallback RentCarsWeb.FallbackController
 
   def index(conn, _params) do
     categories = Categories.list_categories()
