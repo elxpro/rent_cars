@@ -18,7 +18,7 @@ defmodule RentCarsWeb.Api.CategoryController do
   end
 
   def show(conn, %{"id" => id}) do
-    category = Categories.get_category(id)
+    category = Categories.get_category!(id)
     render(conn, "show.json", category: category)
   end
 end
