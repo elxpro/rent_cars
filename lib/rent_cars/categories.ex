@@ -18,8 +18,8 @@ defmodule RentCars.Categories do
     |> Repo.update()
   end
 
-  def get_category(id) do
-    Repo.get(Category, id)
+  def get_category!(id) do
+    Repo.get!(Category, id)
   end
 
   def delete_category(category) do

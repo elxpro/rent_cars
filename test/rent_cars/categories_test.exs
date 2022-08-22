@@ -30,11 +30,11 @@ defmodule RentCars.CategoriesTest do
     assert %{description: ["can't be blank"]} = errors_on(changeset)
   end
 
-  test "get_category/1" do
+  test "get_category!/1" do
     attrs = %{description: "pumpkin 123", name: "sport"}
     {:ok, category} = Categories.create_category(attrs)
 
-    assert Categories.get_category(category.id) == category
+    assert Categories.get_category!(category.id) == category
   end
 
   test "update_category/2" do
@@ -50,6 +50,6 @@ defmodule RentCars.CategoriesTest do
     {:ok, category} = Categories.create_category(attrs)
 
     {:ok, %Category{}} = Categories.delete_category(category)
-    assert Categories.get_category(category.id) == nil
+    assert_raise Ecto.NoResultsError, fn -> Categories.get_category!(category.id) end
   end
 end
