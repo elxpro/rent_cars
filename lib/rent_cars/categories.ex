@@ -12,7 +12,17 @@ defmodule RentCars.Categories do
     |> Repo.insert()
   end
 
+  def update_category(category, attrs) do
+    category
+    |> Category.changeset(attrs)
+    |> Repo.update()
+  end
+
   def get_category(id) do
     Repo.get(Category, id)
+  end
+
+  def delete_category(category) do
+    Repo.delete(category)
   end
 end
