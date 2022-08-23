@@ -60,7 +60,8 @@ defmodule RentCars.MixProject do
       {:excoveralls, "~> 0.10", only: :test},
       {:sobelow, "~> 0.8", only: :dev},
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
-      {:mix_test_watch, "~> 1.0", only: [:dev, :test], runtime: false}
+      {:mix_test_watch, "~> 1.0", only: [:dev, :test], runtime: false},
+      {:argon2_elixir, "~> 3.0"}
     ]
   end
 
