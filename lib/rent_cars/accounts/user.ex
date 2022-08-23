@@ -29,7 +29,9 @@ defmodule RentCars.Accounts.User do
     |> update_change(:email, &String.downcase/1)
     |> validate_length(:password, min: 6, max: 100)
     |> validate_confirmation(:password)
-    |> unique_constraint([:drive_license, :email, :user_name])
+    |> unique_constraint(:drive_license)
+    |> unique_constraint(:email)
+    |> unique_constraint(:user_name)
     |> hash_password()
   end
 
