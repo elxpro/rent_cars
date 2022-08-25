@@ -5,6 +5,10 @@ defmodule RentCars.Sessions do
 
   @error_invalid_credentials {:error, "Email or password is incorrect"}
 
+  def me(token) do
+    Tokenr.verify_auth_token(token)
+  end
+
   def create(email, password) do
     User
     |> Repo.get_by(email: email)

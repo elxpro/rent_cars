@@ -16,6 +16,8 @@ defmodule RentCarsWeb.ConnCase do
   """
 
   use ExUnit.CaseTemplate
+  import RentCars.AccountsFixtures
+  alias RentCars.Sessions
 
   using do
     quote do
@@ -34,5 +36,12 @@ defmodule RentCarsWeb.ConnCase do
   setup tags do
     RentCars.DataCase.setup_sandbox(tags)
     {:ok, conn: Phoenix.ConnTest.build_conn()}
+  end
+
+  def include_normal_user_token(%{conn: conn}) do
+    user = user_fixture()
+    password = "elxpro_password"
+    {:ok, _, token} = Sessions.create(user.email, password)
+    {:ok, conn: conn, user: user, password: password, token: token}
   end
 end
