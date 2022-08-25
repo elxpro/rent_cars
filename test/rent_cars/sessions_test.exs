@@ -4,6 +4,17 @@ defmodule RentCars.SessionsTest do
   alias RentCars.Sessions
   import RentCars.AccountsFixtures
 
+  test "get user from token" do
+    user = user_fixture()
+    password = "elxpro_password"
+
+    assert {:ok, _user_return, token} = Sessions.create(user.email, password)
+
+    assert {:ok, user_return} = Sessions.me(token)
+
+    assert user.email == user_return.email
+  end
+
   test "return authenticated user" do
     user = user_fixture()
     password = "elxpro_password"
