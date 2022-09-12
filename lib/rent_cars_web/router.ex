@@ -30,6 +30,7 @@ defmodule RentCarsWeb.Router do
 
     post "/sessions", SessionController, :create
     post "/sessions/me", SessionController, :me
+    post "/sessions/forgot_password", SessionController, :forgot_password
     post "/sessions/reset_password", SessionController, :reset_password
   end
 
