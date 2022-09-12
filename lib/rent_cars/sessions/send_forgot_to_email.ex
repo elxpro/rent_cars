@@ -14,7 +14,7 @@ defmodule RentCars.Sessions.SendForgotToEmail do
 
   defp prepare_response(user) do
     token = Tokenr.generate_forgot_email_token(user)
-    ForgotPasswordEmail.send_forgot_password_email(user, token)
+    Task.async(fn -> ForgotPasswordEmail.send_forgot_password_email(user, token) end)
     {:ok, user, token}
   end
 end

@@ -9,7 +9,7 @@ defmodule RentCars.Sessions.ResetPassword do
     |> perform(params)
   end
 
-  defp perform({:error, :expired}, _params), do: {:error, "Invalid token"}
+  defp perform({:error, _}, _params), do: {:error, "Invalid token"}
 
   defp perform({:ok, user}, params) do
     Accounts.update_user(user, params)
