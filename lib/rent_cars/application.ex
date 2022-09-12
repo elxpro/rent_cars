@@ -15,7 +15,8 @@ defmodule RentCars.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: RentCars.PubSub},
       # Start the Endpoint (http/https)
-      RentCarsWeb.Endpoint
+      RentCarsWeb.Endpoint,
+      {Finch, name: Swoosh.Finch}
       # Start a worker by calling: RentCars.Worker.start_link(arg)
       # {RentCars.Worker, arg}
     ]
