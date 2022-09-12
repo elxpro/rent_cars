@@ -1,4 +1,4 @@
-defmodule RentCarsWeb.Api.SpecificationControllerTest do
+defmodule RentCarsWeb.Api.Admin.SpecificationControllerTest do
   use RentCarsWeb.ConnCase
 
   import RentCars.SpecificationsFixtures
@@ -19,9 +19,11 @@ defmodule RentCarsWeb.Api.SpecificationControllerTest do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
   end
 
+  setup :include_admin_token
+
   describe "index" do
     test "lists all specifications", %{conn: conn} do
-      conn = get(conn, Routes.api_specification_path(conn, :index))
+      conn = get(conn, Routes.api_admin_specification_path(conn, :index))
       assert json_response(conn, 200)["data"] == []
     end
   end
@@ -29,11 +31,13 @@ defmodule RentCarsWeb.Api.SpecificationControllerTest do
   describe "create specification" do
     test "renders specification when data is valid", %{conn: conn} do
       conn =
-        post(conn, Routes.api_specification_path(conn, :create), specification: @create_attrs)
+        post(conn, Routes.api_admin_specification_path(conn, :create),
+          specification: @create_attrs
+        )
 
       assert %{"id" => id} = json_response(conn, 201)["data"]
 
-      conn = get(conn, Routes.api_specification_path(conn, :show, id))
+      conn = get(conn, Routes.api_admin_specification_path(conn, :show, id))
 
       assert %{
                "id" => ^id,
@@ -44,7 +48,9 @@ defmodule RentCarsWeb.Api.SpecificationControllerTest do
 
     test "renders errors when data is invalid", %{conn: conn} do
       conn =
-        post(conn, Routes.api_specification_path(conn, :create), specification: @invalid_attrs)
+        post(conn, Routes.api_admin_specification_path(conn, :create),
+          specification: @invalid_attrs
+        )
 
       assert json_response(conn, 422)["errors"] != %{}
     end
@@ -58,13 +64,13 @@ defmodule RentCarsWeb.Api.SpecificationControllerTest do
       specification: %Specification{id: id} = specification
     } do
       conn =
-        put(conn, Routes.api_specification_path(conn, :update, specification),
+        put(conn, Routes.api_admin_specification_path(conn, :update, specification),
           specification: @update_attrs
         )
 
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 
-      conn = get(conn, Routes.api_specification_path(conn, :show, id))
+      conn = get(conn, Routes.api_admin_specification_path(conn, :show, id))
 
       assert %{
                "id" => ^id,
@@ -75,7 +81,7 @@ defmodule RentCarsWeb.Api.SpecificationControllerTest do
 
     test "renders errors when data is invalid", %{conn: conn, specification: specification} do
       conn =
-        put(conn, Routes.api_specification_path(conn, :update, specification),
+        put(conn, Routes.api_admin_specification_path(conn, :update, specification),
           specification: @invalid_attrs
         )
 
@@ -87,11 +93,11 @@ defmodule RentCarsWeb.Api.SpecificationControllerTest do
     setup [:create_specification]
 
     test "deletes chosen specification", %{conn: conn, specification: specification} do
-      conn = delete(conn, Routes.api_specification_path(conn, :delete, specification))
+      conn = delete(conn, Routes.api_admin_specification_path(conn, :delete, specification))
       assert response(conn, 204)
 
       assert_error_sent 404, fn ->
-        get(conn, Routes.api_specification_path(conn, :show, specification))
+        get(conn, Routes.api_admin_specification_path(conn, :show, specification))
       end
     end
   end

@@ -15,6 +15,16 @@ defmodule RentCars.AccountsFixtures do
     Enum.into(attrs, valid_attrs)
   end
 
+  def admin_fixture(attrs \\ %{}) do
+    {:ok, user} =
+      attrs
+      |> user_attrs()
+      |> Map.put(:role, "ADMIN")
+      |> Accounts.create_user()
+
+    user
+  end
+
   def user_fixture(attrs \\ %{}) do
     {:ok, user} =
       attrs
