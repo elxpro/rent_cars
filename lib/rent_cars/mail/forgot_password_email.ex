@@ -15,10 +15,8 @@ defmodule RentCars.Mail.ForgotPasswordEmail do
   end
 
   def send_forgot_password_email(user, token) do
-    Task.async(fn ->
-      user
-      |> create_email(token)
-      |> Mailer.deliver()
-    end)
+    user
+    |> create_email(token)
+    |> Mailer.deliver()
   end
 end
