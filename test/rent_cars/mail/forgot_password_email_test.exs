@@ -8,7 +8,7 @@ defmodule RentCars.Mail.ForgotPasswordEmailTest do
     user = user_fixture()
     token = "ljdafslkjadslkjflkjadf"
     email_expected = ForgotPasswordEmail.create_email(user, token)
-    assert email_expected.to == [{"elxpro first_name", "elxpro@email"}]
+    assert email_expected.to == [{"elxpro first_name", user.email}]
     assert_email_not_sent(email_expected)
   end
 
