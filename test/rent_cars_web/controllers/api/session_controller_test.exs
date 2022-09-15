@@ -9,7 +9,7 @@ defmodule RentCarsWeb.Api.SessionControllerTest do
         Routes.api_session_path(conn, :me, token: "dsfdsfsd")
       )
 
-    assert json_response(conn, 400)["message"] == "invalid"
+    assert json_response(conn, 401)["error"] == "Unauthenticated/Invalid Token"
   end
 
   describe "handle with sessions" do
