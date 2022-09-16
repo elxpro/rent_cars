@@ -1,4 +1,4 @@
-defmodule RentCarsWeb.Api.Admin.CategoryControllerTest do
+defmodule RentCarsWeb.Api.Admin.CarControllerTest do
   use RentCarsWeb.ConnCase
   import RentCars.CarsFixtures
   import RentCars.CategoriesFixtures
