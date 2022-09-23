@@ -2,7 +2,7 @@ defmodule RentCars.Cars do
   alias __MODULE__.Car
   alias RentCars.Repo
 
-  def get_car!(id), do: Repo.get!(Car, id)
+  def get_car!(id), do: Repo.get!(Car, id) |> Repo.preload(:specifications)
 
   def create(attrs) do
     %Car{}
