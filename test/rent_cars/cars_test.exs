@@ -34,7 +34,7 @@ defmodule RentCars.CarsTest do
     assert car.brand == payload.brand
     assert car.daily_rate == payload.daily_rate
     assert car.license_plate == String.upcase(payload.license_plate)
-    assert car.fine_amount == payload.fine_amount
+    assert car.fine_amount == Money.new(payload.fine_amount)
 
     Enum.each(car.specifications, fn specification ->
       assert specification.name in Enum.map(payload.specifications, & &1.name)
@@ -54,5 +54,16 @@ defmodule RentCars.CarsTest do
     payload = %{license_plate: "update license_plate"}
     assert {:error, changeset} = Cars.update(car.id, payload)
     assert "you can`t update license_plate" in errors_on(changeset).license_plate
+  end
+
+  test "list all available cars" do
+    category = category_fixture()
+    car_fixture(%{category_id: category.id})
+    car_fixture(%{category_id: category.id, name: "pumpkin"})
+    car_fixture(%{available: false, category_id: category.id})
+
+    assert Cars.list_cars() |> Enum.count() == 2
+
+    assert Cars.list_cars(name: "pump") |> Enum.count() == 1
   end
 end
