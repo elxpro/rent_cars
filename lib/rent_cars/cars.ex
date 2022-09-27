@@ -24,9 +24,20 @@ defmodule RentCars.Cars do
 
     filter_params
     |> Enum.reduce(query, fn
+      {:category, category}, query ->
+        category = "%" <> category <> "%"
+
+        query
+        |> join(:inner, [c], ca in assoc(c, :category))
+        |> where([_c, ca], ilike(ca.name, ^category))
+
       {:name, name}, query ->
         name = "%" <> name <> "%"
         where(query, [c], ilike(c.name, ^name))
+
+      {:brand, brand}, query ->
+        brand = "%" <> brand <> "%"
+        where(query, [c], ilike(c.brand, ^brand))
     end)
     |> preload([:specifications])
     |> Repo.all()
