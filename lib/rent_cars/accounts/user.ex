@@ -1,6 +1,7 @@
 defmodule RentCars.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
+  alias RentCars.Rentals.Rental
 
   @fields ~w/role/a
   @required_fields ~w/first_name last_name user_name password password_confirmation email drive_license/a
@@ -17,6 +18,7 @@ defmodule RentCars.Accounts.User do
     field :email, :string
     field :drive_license, :string
     field :role, Ecto.Enum, values: @role_values, default: :USER
+    has_many :rentals, Rental
 
     timestamps()
   end
