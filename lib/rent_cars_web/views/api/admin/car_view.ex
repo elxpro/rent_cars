@@ -11,6 +11,7 @@ defmodule RentCarsWeb.Api.Admin.CarView do
       id: car.id,
       description: car.description,
       brand: car.brand,
+      available: car.available,
       daily_rate: car.daily_rate,
       license_plate: car.license_plate,
       fine_amount: Money.to_string(car.fine_amount),
