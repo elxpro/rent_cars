@@ -1,11 +1,12 @@
 defmodule RentCarsWeb.Api.RentalControllerTest do
   use RentCarsWeb.ConnCase
   import RentCars.CarsFixtures
+  import RentCars.RentalsFixtures
 
-  describe "handle with sessions" do
+  describe "rentals test" do
     setup :include_normal_user_token
 
-    test "create session", %{conn: conn} do
+    test "rent a car", %{conn: conn} do
       car = car_fixture()
 
       payload = %{
@@ -16,6 +17,19 @@ defmodule RentCarsWeb.Api.RentalControllerTest do
       conn = post(conn, Routes.api_rental_path(conn, :create, payload))
 
       assert json_response(conn, 201)["data"]["car"]["id"] == car.id
+    end
+
+    test "list all cars booked", %{conn: conn, user: user} do
+      car = car_fixture()
+      rental_fixture(%{user_id: user.id, car_id: car.id})
+
+      conn = get(conn, Routes.api_rental_path(conn, :index))
+
+      car_id = car.id
+
+      assert %{
+               "car" => %{"data" => %{"id" => ^car_id}}
+             } = json_response(conn, 200)["data"] |> hd()
     end
   end
 
