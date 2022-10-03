@@ -13,9 +13,8 @@ defmodule RentCars.AccountsTest do
         path: "test/support/fixtures/avatar.png"
       }
 
-      Accounts.upload_photo(user.id, photo) == "bla"
-
-      assert RentCars.Accounts.Avatar.url({"avsssakddatar.png", user}, :original) == "sdfsdf"
+      assert {:ok, user_updated} = Accounts.upload_photo(user.id, photo)
+      assert user_updated.avatar.file_name == "avatar.png"
     end
   end
 
