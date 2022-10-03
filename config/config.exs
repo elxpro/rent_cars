@@ -33,6 +33,9 @@ config :swoosh, :api_client, false
 config :money,
   default_currency: :USD
 
+config :waffle,
+  storage: Waffle.Storage.Local
+
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.14.29",

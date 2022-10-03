@@ -17,4 +17,9 @@ defmodule RentCars.Accounts do
     |> User.update_user(user_params)
     |> Repo.update()
   end
+
+  def upload_photo(user_id, photo) do
+    user = get_user!(user_id)
+    RentCars.Accounts.Avatar.store({photo, user})
+  end
 end

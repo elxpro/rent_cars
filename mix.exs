@@ -65,7 +65,9 @@ defmodule RentCars.MixProject do
       {:phoenix_swoosh, "~> 1.0"},
       {:finch, "~> 0.13.0"},
       {:money, "~> 1.11"},
-      {:timex, "~> 3.0"}
+      {:timex, "~> 3.0"},
+      {:waffle, "~> 1.1"},
+      {:waffle_ecto, "~> 0.0.11"}
     ]
   end
 
