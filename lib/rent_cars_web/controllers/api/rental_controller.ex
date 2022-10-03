@@ -12,6 +12,14 @@ defmodule RentCarsWeb.Api.RentalController do
     end
   end
 
+  def return(conn, %{"id" => id}) do
+    [user_id] = get_req_header(conn, "user_id")
+
+    with %{rental: {:ok, %{return_car: rental}}} <- Rentals.return_car(id, user_id) do
+      conn |> put_status(:created) |> render("show.json", rental: rental)
+    end
+  end
+
   def index(conn, _params) do
     [user_id] = get_req_header(conn, "user_id")
     rentals = Rentals.list_rentals(user_id)

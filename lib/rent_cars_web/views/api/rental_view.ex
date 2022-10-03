@@ -17,7 +17,7 @@ defmodule RentCarsWeb.Api.RentalView do
       end_date: rental.end_date,
       expected_return_date: rental.expected_return_date,
       start_date: rental.start_date,
-      total: rental.total,
+      total: Money.to_string((rental.total == nil && Money.new(0)) || rental.total),
       user_id: rental.user_id
     }
   end
