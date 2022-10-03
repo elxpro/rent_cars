@@ -50,6 +50,7 @@ defmodule RentCarsWeb.Router do
       pipe_through :authenticated
       post "/sessions/me", SessionController, :me
       get "/users/:id", UserController, :show
+      patch "/users/photo", UserController, :upload_photo
 
       post "/rentals", RentalController, :create
       post "/rentals/return/:id", RentalController, :return
