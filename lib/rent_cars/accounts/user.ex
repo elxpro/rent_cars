@@ -1,6 +1,8 @@
 defmodule RentCars.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
+  import Waffle.Ecto.Schema
+  alias RentCars.Accounts.Avatar
   alias RentCars.Rentals.Rental
 
   @fields ~w/role/a
@@ -19,6 +21,7 @@ defmodule RentCars.Accounts.User do
     field :drive_license, :string
     field :role, Ecto.Enum, values: @role_values, default: :USER
     has_many :rentals, Rental
+    field :avatar, Avatar.Type
 
     timestamps()
   end
@@ -43,6 +46,10 @@ defmodule RentCars.Accounts.User do
 
   def update_user(user, params) do
     changeset(user, params)
+  end
+
+  def update_photo(user, params) do
+    cast_attachments(user, params, [:avatar])
   end
 
   defp hash_password(%{valid?: true, changes: %{password: password}} = changeset) do

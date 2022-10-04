@@ -1,5 +1,6 @@
 defmodule RentCarsWeb.Api.UserView do
   use RentCarsWeb, :view
+  alias RentCars.Accounts.Avatar
 
   def render("show.json", %{user: user}) do
     %{data: render_one(user, __MODULE__, "user.json")}
@@ -13,7 +14,8 @@ defmodule RentCarsWeb.Api.UserView do
       user_name: user.user_name,
       drive_license: user.drive_license,
       email: user.email,
-      role: user.role
+      role: user.role,
+      avatar: Avatar.url({user.avatar, user})
     }
   end
 end

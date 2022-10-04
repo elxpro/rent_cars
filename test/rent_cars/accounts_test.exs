@@ -3,6 +3,21 @@ defmodule RentCars.AccountsTest do
   alias RentCars.Accounts
   import RentCars.AccountsFixtures
 
+  describe "upload avatar" do
+    test "upload avatar image" do
+      user = user_fixture()
+
+      photo = %Plug.Upload{
+        content_type: "image/png",
+        filename: "avatar.png",
+        path: "test/support/fixtures/avatar.png"
+      }
+
+      assert {:ok, user_updated} = Accounts.upload_photo(user.id, photo)
+      assert user_updated.avatar.file_name == "avatar.png"
+    end
+  end
+
   describe "get_user" do
     test "get_user!/1" do
       user = user_fixture()

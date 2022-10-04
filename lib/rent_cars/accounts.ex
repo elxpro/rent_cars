@@ -17,4 +17,11 @@ defmodule RentCars.Accounts do
     |> User.update_user(user_params)
     |> Repo.update()
   end
+
+  def upload_photo(user_id, photo) do
+    user_id
+    |> get_user!()
+    |> User.update_photo(%{avatar: photo})
+    |> Repo.update()
+  end
 end
