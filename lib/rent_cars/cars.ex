@@ -42,4 +42,12 @@ defmodule RentCars.Cars do
     |> preload([:specifications])
     |> Repo.all()
   end
+
+  def create_images(id, images) do
+    id
+    |> get_car!()
+    |> Repo.preload(:images)
+    |> Car.changeset(%{images: images})
+    |> Repo.update()
+  end
 end

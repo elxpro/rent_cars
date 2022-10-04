@@ -82,4 +82,42 @@ defmodule RentCars.CarsTest do
 
     assert Cars.list_cars(category: "pum") |> Enum.count() == 1
   end
+
+  test "create car images" do
+    car = car_fixture(%{brand: "pumpkin"})
+
+    images = [
+      %{
+        image: %Plug.Upload{
+          content_type: "image/png",
+          filename: "car_1.jpeg",
+          path: "test/support/fixtures/car_1.jpeg"
+        }
+      },
+      %{
+        image: %Plug.Upload{
+          content_type: "image/png",
+          filename: "car_2.jpeg",
+          path: "test/support/fixtures/car_2.jpeg"
+        }
+      },
+      %{
+        image: %Plug.Upload{
+          content_type: "image/png",
+          filename: "car_3.jpeg",
+          path: "test/support/fixtures/car_3.jpeg"
+        }
+      }
+    ]
+
+    {:ok, %{images: images_result}} = Cars.create_images(car.id, images)
+
+    assert images_result
+           |> Enum.map(& &1.image.file_name) ==
+             [
+               "car_1.jpeg",
+               "car_2.jpeg",
+               "car_3.jpeg"
+             ]
+  end
 end
