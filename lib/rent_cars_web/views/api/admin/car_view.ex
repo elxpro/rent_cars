@@ -33,7 +33,7 @@ defmodule RentCarsWeb.Api.Admin.CarView do
 
   defp load_images(%{images: images} = cars) do
     if Ecto.assoc_loaded?(cars.images) do
-      Enum.map(images, &CarPhoto.url({&1.image, &1}))
+      Enum.map(images, &CarPhoto.url({&1.image, &1}, signed: true))
     else
       []
     end
