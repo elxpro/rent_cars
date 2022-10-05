@@ -20,7 +20,6 @@ defmodule RentCarsWeb.Api.UserControllerTest do
   end
 
   test "upload user image", %{conn: conn, user: _user} do
-
     photo = %Plug.Upload{
       content_type: "image/png",
       filename: "avatar.png",
