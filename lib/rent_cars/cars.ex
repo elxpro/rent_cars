@@ -20,7 +20,6 @@ defmodule RentCars.Cars do
 
   def list_cars(filter_params \\ []) do
     query = where(Car, [c], c.available == true)
-    # TODO load car_images
 
     filter_params
     |> Enum.reduce(query, fn
@@ -39,11 +38,12 @@ defmodule RentCars.Cars do
         brand = "%" <> brand <> "%"
         where(query, [c], ilike(c.brand, ^brand))
     end)
-    |> preload([:specifications])
+    |> preload([:specifications, :images])
     |> Repo.all()
   end
 
   def create_images(id, images) do
+    images = Enum.map(images, &Map.put(&1, :car_id, id))
     id
     |> get_car!()
     |> Repo.preload(:images)
