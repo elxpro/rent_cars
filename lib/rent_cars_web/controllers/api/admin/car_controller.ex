@@ -13,7 +13,7 @@ defmodule RentCarsWeb.Api.Admin.CarController do
   end
 
   def create_images(conn, %{"id" => id, "images" => images}) do
-    with {:ok, car} <- Cars.create_images(id, images) do
+    with {:ok, car} <- Cars.create_images(id, Enum.map(images, &%{image: &1})) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.api_admin_car_path(conn, :show, car))

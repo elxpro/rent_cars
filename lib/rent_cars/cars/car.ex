@@ -19,7 +19,7 @@ defmodule RentCars.Cars.Car do
     field :name, :string
     belongs_to :category, Category
     many_to_many :specifications, Specification, join_through: CarSpecification
-    has_many :images, CarImage
+    has_many :images, CarImage, on_replace: :delete_if_exists, on_delete: :delete_all
 
     timestamps()
   end
