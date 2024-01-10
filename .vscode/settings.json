@@ -1,0 +1,10 @@
+{
+    "rest-client.environmentVariables": {
+        "$shared": {
+            "base_url": "http://localhost:4000/api"
+        },
+        "prod": {
+            "base_url": "http://localhost:4000/api"
+        }
+    }
+}
