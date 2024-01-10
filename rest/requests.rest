@@ -1,0 +1,61 @@
+# Important variables
+@token = {{login.response.body.data.token}}
+@admin_email = adm@elxpro.com
+@default_password = 123123123
+@user_email = user@elxpro.com
+
+
+# USERS/SESSIONS Requests related to users and Sessiosn
+
+### Create User (POST)
+
+POST {{base_url}}/users HTTP/1.1
+content-type: application/json
+
+{
+    "user": {
+        "email": "{{admin_email}}",
+        "user_name": "elxprogus",
+        "password": "{{default_password}}",
+        "password_confirmation": "{{default_password}}",
+        "drive_license": "11111111",
+        "first_name": "Gustavo",
+        "last_name": "oliveira"
+    }
+}
+
+
+### Login User (POST)
+# @name login
+
+POST {{base_url}}/sessions HTTP/1.1
+content-type: application/json
+
+{
+    "email": "{{admin_email}}",
+    "password": "{{default_password}}"
+}
+
+
+### Get user logged in data
+
+
+
+POST {{base_url}}/sessions/me HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "token": "{{token}}"
+}
+
+
+
+# RENTALS REQUESTS
+
+### Rental (GET)
+
+GET {{base_url}}/rentals HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{token}}
+
